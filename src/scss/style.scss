@@ -1,0 +1,115 @@
+@import "modules/reset";
+@import "modules/variables";
+@import "modules/mixins";
+@import "modules/basic";
+
+.wrapper {
+  @include sizes(100%, 35rem);
+}
+
+.slider-container {
+  @include sizes();
+  position: relative;
+  z-index: $z-index-1;
+  overflow: hidden;
+
+  > .slider {
+    height: 100%;
+    margin-left: 0;
+    background: $color-body-text;
+
+    > .slider-item {
+      height: 100%;
+      float: left;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: relative;
+
+      > .slider-item-container {
+        @include sizes();
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: fade-out($color-black, 0.5);
+        padding: 10rem 8rem 0rem;
+        position: absolute;
+        bottom: 0rem;
+        left: 0rem;
+        color: $color-white;
+        text-align: center;
+
+        > .slider-item-header {
+          font-size: 1.4em;
+          font-weight: 700;
+          margin-bottom: 0.8rem;
+        }
+
+        > .slider-item-content {
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+
+  .prev-btn,
+  .next-btn {
+    @include sizes(60px, 100%);
+    @extend %flex;
+    position: absolute;
+    top: 0;
+    font-size: 4rem;
+    background: fade-out($color-black, 0.5);
+    border: none;
+    outline: none;
+    color: $color-white;
+    cursor: pointer;
+    transition: $transition-primary;
+    z-index: $z-index-3;
+
+    &:hover {
+      background: fade-out($color-black, 0.4);
+      transition: $transition-primary;
+    }
+  }
+
+  .next-btn {
+    right: 0;
+  }
+
+  .prev-btn {
+    left: 0;
+  }
+
+  .dots-container {
+    @extend %flex;
+    position: absolute;
+    z-index: $z-index-2;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .dot {
+      @include sizes(2rem, 2rem);
+      margin: 0 0.5rem;
+      background: fade-out($color-body-text, 0.5);
+      border: 0.2rem solid $color-white;
+      border-radius: 50%;
+      cursor: pointer;
+      box-sizing: content-box;
+      transition: $transition-primary;
+
+      &:hover,
+      &:focus {
+        transition: $transition-primary;
+        background: fade-out($color-white, 0.5);
+      }
+
+      &.active {
+        transition: $transition-primary;
+        background: $color-white;
+      }
+    }
+  }
+}
